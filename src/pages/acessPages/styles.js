@@ -1,4 +1,10 @@
 import styled from "styled-components";
+import {
+	lightBlue,
+	white,
+	midGray,
+	inputTextColor,
+} from "../../constants/colors";
 
 export const StyledPage = styled.div`
 	width: 100vw;
@@ -22,7 +28,7 @@ export const StyledPage = styled.div`
 		line-height: 17px;
 		text-align: center;
 		text-decoration-line: underline;
-		color: #52b6ff;
+		color: ${lightBlue};
 		cursor: pointer;
 	}
 `;
@@ -38,19 +44,19 @@ export const StyledForm = styled.form`
 		height: 45px;
 		margin-bottom: 10px;
 
-		border: 1px solid #a6a6a6;
+		border: 1px solid ${midGray};
 		border-radius: 5px;
 		box-sizing: border-box;
 		padding-left: 15px;
 
 		font-size: 19.976px;
 		line-height: 25px;
-		color: #000;
+		color: ${inputTextColor};
 
 		::placeholder {
 			font-size: 19.976px;
 			line-height: 25px;
-			color: #a6a6a6;
+			color: ${midGray};
 		}
 	}
 `;
@@ -58,18 +64,22 @@ export const StyledForm = styled.form`
 export const StyledButton = styled.button`
 	width: 305px;
 	height: 45px;
-	left: 36px;
-	top: 381px;
-
-	background: #52b6ff;
+	background: ${lightBlue};
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border-radius: 5px;
 	border: none;
 
 	font-size: 20.976px;
 	line-height: 26px;
 	text-align: center;
-	color: #ffffff;
+	color: ${white};
 
 	margin-bottom: 25px;
 	cursor: pointer;
+
+	:disabled {
+		opacity: 0.7;
+	}
 `;

@@ -1,0 +1,9 @@
+export const lightBlue = "#52B6FF";
+export const darkBlue = "#126BA5";
+export const midGray = "#a6a6a6";
+export const lightGray = "#CFCFCF";
+export const green = "#8FC549";
+export const textColor = "#666666";
+export const darkGray = lightGray;
+export const white = "#fff";
+export const inputTextColor = "#000";
