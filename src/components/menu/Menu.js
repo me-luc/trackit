@@ -20,11 +20,6 @@ export default function Menu() {
 	);
 }
 
-const Text = styled.p`
-	fill: "red";
-	font-size: 20px;
-`;
-
 const StyledPage = styled.div`
 	width: 100vw;
 	height: 70px;

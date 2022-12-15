@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
-import { PageModel } from "./styles";
+import { PageModel, Text, Title } from "./styles";
 
 export default function HistoryPage() {
 	return (
@@ -9,7 +9,10 @@ export default function HistoryPage() {
 			<Header />
 
 			<StyledPage>
-				<h1>HISTORY PAGE</h1>
+				<Title>Histórico</Title>
+				<Text>
+					Em breve você poderá ver o histórico dos seus hábitos aqui!
+				</Text>
 			</StyledPage>
 
 			<Menu />

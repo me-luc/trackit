@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
-import { PageModel } from "./styles";
+import { PageModel, Title } from "./styles";
 
 export default function TodayPage() {
 	return (
@@ -9,7 +9,7 @@ export default function TodayPage() {
 			<Header />
 
 			<StyledPage>
-				<h1>TODAY PAGE</h1>
+				<Title>TODAY PAGE</Title>
 			</StyledPage>
 
 			<Menu />
