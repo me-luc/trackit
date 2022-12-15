@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darkBlue, textColor } from "../constants/colors";
+import { darkBlue, midGray, textColor } from "../constants/colors";
 
 export const PageModel = styled.div`
 	display: flex;
@@ -31,4 +31,12 @@ export const Text = styled.p`
 	line-height: 22px;
 
 	color: ${textColor};
+`;
+
+export const InfoText = styled.p`
+	font-weight: 400;
+	font-size: 17.976px;
+	line-height: 22px;
+
+	color: ${midGray};
 `;
