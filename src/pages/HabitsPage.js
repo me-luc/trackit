@@ -1,42 +1,70 @@
-import { getQueriesForElement } from "@testing-library/react";
+import {
+	accentBkg,
+	green,
+	lightBlue,
+	midGray,
+	textColor,
+} from "../constants/colors";
+import { PageModel, Title } from "./styles";
+
 import styled from "styled-components";
-import Habit from "../components/habits/Habit";
+import HabitEdit from "../components/habits/HabitEdit";
 import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
-import { green, midGray } from "../constants/colors";
-import { PageModel, Title } from "./styles";
+import HabitInfo from "../components/habits/HabitInfo";
 
 export default function HabitsPage() {
 	return (
 		<>
 			<Header />
 			<StyledPage>
-				<Title>Segunda, 17/05</Title>
-				<NoHabitText>Nenhum hábito concluído ainda</NoHabitText>
-				<ProgressText>67% dos hábitos concluídos</ProgressText>
-				<Habit />
-				<Habit />
-				<Habit />
+				<NewHabitBox>
+					<Title>Meus hábitos</Title>
+					<NewIcon>
+						<ion-icon name="add-outline"></ion-icon>
+					</NewIcon>
+				</NewHabitBox>
+				<NoHabitText>
+					Você não tem nenhum hábito cadastrado ainda. Adicione um
+					hábito para começar a trackear!
+				</NoHabitText>
+				<HabitEdit />
+				<HabitInfo />
 			</StyledPage>
 			<Menu />
 		</>
 	);
 }
 
+const StyledPage = styled(PageModel)``;
+
 const NoHabitText = styled.p`
 	font-weight: 400;
 	font-size: 17.976px;
 	line-height: 22px;
-	color: ${midGray};
+	color: ${textColor};
 	margin-bottom: 15px;
 `;
 
-const ProgressText = styled.p`
-	font-weight: 400;
-	font-size: 17.976px;
-	line-height: 22px;
-	color: ${green};
-	margin-bottom: 15px;
+const NewIcon = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	width: 40px;
+	height: 35px;
+	border-radius: 4.63636px;
+	background: ${lightBlue};
+
+	ion-icon {
+		font-size: 25px;
+		color: ${accentBkg};
+		--ionicon-stroke-width: 60px;
+	}
 `;
 
-const StyledPage = styled(PageModel)``;
+const NewHabitBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;

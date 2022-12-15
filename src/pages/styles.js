@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import { darkBlue, midGray, textColor } from "../constants/colors";
+import {
+	darkBlue,
+	midGray,
+	textColor,
+	inputTextColor,
+	lightBlue,
+	lightGray,
+	accentBkg,
+} from "../constants/colors";
 
 export const PageModel = styled.div`
 	display: flex;
@@ -11,6 +19,7 @@ export const PageModel = styled.div`
 
 	box-sizing: border-box;
 	padding: 20px;
+	overflow: scroll;
 
 	@media (min-width: 750px) {
 		align-items: center;

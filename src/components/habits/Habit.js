@@ -6,6 +6,7 @@ import {
 	green,
 	textColor,
 } from "../../constants/colors";
+import { Title } from "./styles";
 
 export default function Habit() {
 	return (
@@ -57,18 +58,11 @@ const StyledHabit = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 
 	@media (min-width: 750px) {
 		width: 500px;
 	}
-`;
-
-const Title = styled.h1`
-	font-weight: 500;
-	font-size: 19.976px;
-	line-height: 25px;
-	color: ${textColor};
 `;
 
 const Info = styled.p`

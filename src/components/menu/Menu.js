@@ -27,6 +27,8 @@ const StyledPage = styled.div`
 	bottom: 0;
 	left: 0;
 	background: ${accentBkg};
+	box-shadow: 0px -8px 4px rgba(234, 226, 226, 0.5);
+
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
