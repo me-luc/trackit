@@ -3,6 +3,7 @@ import {
 	accentBkg,
 	detailGray,
 	lightGray,
+	green,
 	textColor,
 } from "../../constants/colors";
 
@@ -14,25 +15,39 @@ export default function Habit() {
 				<Info>Sequência atual: 3 dias</Info>
 				<Info>Seu recorde: 5 dias</Info>
 			</div>
-			<CheckIcon></CheckIcon>
+			<CheckIcon selected={false}>
+				<ion-icon name="checkmark-outline"></ion-icon>
+			</CheckIcon>
 		</StyledHabit>
 	);
 }
 
 const CheckIcon = styled.div`
-	width: 70px;
-	height: 70px;
+	width: 60px;
+	height: 60px;
 	left: 276px;
 	top: 190px;
 
-	background: ${lightGray};
+	background: ${({ selected }) => (selected ? green : lightGray)};
 	border: 1px solid ${detailGray};
-	border-radius: 5px;
+	border-radius: 7px;
+	cursor: pointer;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	ion-icon {
+		font-size: 50px;
+		color: ${accentBkg};
+		--ionicon-stroke-width: 50px;
+	}
 `;
 
 const StyledHabit = styled.div`
-	width: 340px;
-	height: 95px;
+	width: 100%;
+	min-width: 290px;
+	height: 110px;
 
 	background: ${accentBkg};
 	border-radius: 5px;
@@ -42,10 +57,15 @@ const StyledHabit = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 20px;
+
+	@media (min-width: 750px) {
+		width: 500px;
+	}
 `;
 
 const Title = styled.h1`
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 19.976px;
 	line-height: 25px;
 	color: ${textColor};
@@ -54,7 +74,7 @@ const Title = styled.h1`
 const Info = styled.p`
 	font-family: "Lexend Deca";
 	font-style: normal;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 12.976px;
 	line-height: 16px;
 

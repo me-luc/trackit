@@ -10,7 +10,7 @@ export const PageModel = styled.div`
 	font-style: normal;
 
 	box-sizing: border-box;
-	padding: 30px;
+	padding: 20px;
 
 	@media (min-width: 750px) {
 		align-items: center;
