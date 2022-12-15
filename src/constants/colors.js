@@ -5,5 +5,7 @@ export const lightGray = "#CFCFCF";
 export const green = "#8FC549";
 export const textColor = "#666666";
 export const darkGray = lightGray;
-export const white = "#fff";
 export const inputTextColor = "#000";
+
+export const baseBkg = "#E2DFDF";
+export const accentBkg = "#fff";

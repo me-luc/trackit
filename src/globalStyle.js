@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { baseBkg } from "./constants/colors";
 
 const GlobalStyle = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -28,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
+        background-color: ${baseBkg};
     }
     ol, ul {
         list-style: none;
@@ -44,7 +46,9 @@ const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
-
+    a {
+        text-decoration: none;
+    }
 `;
 
 export default GlobalStyle;

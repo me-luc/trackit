@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { StyledButton, StyledForm, StyledPage } from "./styles";
 import logo from "../../assets/logo.png";
 
-import Loading from "./Loading";
+import Loading from "../../animation/Loading";
 import { useState } from "react";
 
 export default function LoginPage() {

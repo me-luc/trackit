@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {
 	lightBlue,
-	white,
+	accentBkg,
 	midGray,
 	inputTextColor,
 } from "../../constants/colors";
@@ -9,6 +9,7 @@ import {
 export const StyledPage = styled.div`
 	width: 100vw;
 	height: 100vh;
+	background: ${accentBkg};
 
 	display: flex;
 	flex-direction: column;
@@ -74,7 +75,7 @@ export const StyledButton = styled.button`
 	font-size: 20.976px;
 	line-height: 26px;
 	text-align: center;
-	color: ${white};
+	color: ${accentBkg};
 
 	margin-bottom: 25px;
 	cursor: pointer;

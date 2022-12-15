@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { StyledButton, StyledForm, StyledPage } from "./styles";
-import Loading from "./Loading";
+import Loading from "../../animation/Loading";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 
