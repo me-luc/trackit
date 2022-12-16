@@ -1,13 +1,5 @@
 import styled from "styled-components";
-import {
-	darkBlue,
-	midGray,
-	textColor,
-	inputTextColor,
-	lightBlue,
-	lightGray,
-	accentBkg,
-} from "../constants/colors";
+import { darkBlue, midGray, textColor } from "../constants/colors";
 
 export const PageModel = styled.div`
 	display: flex;

@@ -4,6 +4,7 @@ import {
 	accentBkg,
 	midGray,
 	inputTextColor,
+	errorColor,
 } from "../../constants/colors";
 
 export const StyledPage = styled.div`
@@ -23,15 +24,15 @@ export const StyledPage = styled.div`
 	img {
 		margin-bottom: 40px;
 	}
+`;
 
-	p {
-		font-size: 13.976px;
-		line-height: 17px;
-		text-align: center;
-		text-decoration-line: underline;
-		color: ${lightBlue};
-		cursor: pointer;
-	}
+export const SwitchMessage = styled.p`
+	font-size: 13.976px;
+	line-height: 17px;
+	text-align: center;
+	text-decoration-line: underline;
+	color: ${lightBlue};
+	cursor: pointer;
 `;
 
 export const StyledForm = styled.form`
@@ -84,4 +85,15 @@ export const StyledButton = styled.button`
 		opacity: 0.7;
 		cursor: not-allowed;
 	}
+`;
+
+export const ErrorMessage = styled.p`
+	width: 100%;
+	font-size: 13.976px;
+	line-height: 17px;
+	color: ${errorColor};
+	cursor: pointer;
+	display: flex;
+	justify-content: right;
+	margin-bottom: 5px;
 `;

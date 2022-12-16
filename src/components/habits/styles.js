@@ -1,8 +1,6 @@
 import {
 	accentBkg,
 	midGray,
-	inputTextColor,
-	lightBlue,
 	lightGray,
 	textColor,
 } from "../../constants/colors";

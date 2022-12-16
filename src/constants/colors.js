@@ -9,3 +9,4 @@ export const inputTextColor = "#000";
 export const detailGray = "#e7e7e7";
 export const baseBkg = "#E2DFDF";
 export const accentBkg = "#fff";
+export const errorColor = "#FF5733 ";

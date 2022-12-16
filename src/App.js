@@ -12,8 +12,7 @@ export default function App() {
 		<BrowserRouter>
 			<GlobalStyle />
 			<Routes>
-				<Route path="/" element={<HistoryPage />} />
-				<Route path="/VOLTARAONORMAL" element={<LoginPage />} />
+				<Route path="/" element={<LoginPage />} />
 				<Route path="/cadastro" element={<SignUpPage />} />
 				<Route path="/habitos" element={<HabitsPage />} />
 				<Route path="/hoje" element={<TodayPage />} />

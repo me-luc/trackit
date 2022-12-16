@@ -5,9 +5,7 @@ import {
 	midGray,
 	inputTextColor,
 	lightBlue,
-	lightGray,
 } from "../../constants/colors";
-import HabitInfo from "./HabitInfo";
 import Loading from "../../animation/Loading";
 import { DayButton } from "./styles";
 
@@ -120,20 +118,4 @@ const StyledInput = styled.input`
 		line-height: 25px;
 		color: ${midGray};
 	}
-`;
-
-const StyledButton = styled.button`
-	width: 30px;
-	height: 30px;
-	background: ${({ isSelected }) => (isSelected ? lightGray : "none")};
-	border: ${({ isSelected }) =>
-		isSelected ? "none" : `1px solid ${midGray}`};
-	border-radius: 5px;
-	cursor: pointer;
-
-	font-weight: 400;
-	font-size: 19.976px;
-	line-height: 25px;
-	color: ${({ isSelected }) => (isSelected ? `${accentBkg}` : `${midGray}`)};
-	margin-right: 5px;
 `;

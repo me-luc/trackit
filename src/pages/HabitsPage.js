@@ -1,10 +1,4 @@
-import {
-	accentBkg,
-	green,
-	lightBlue,
-	midGray,
-	textColor,
-} from "../constants/colors";
+import { accentBkg, lightBlue, textColor } from "../constants/colors";
 import { PageModel, Title } from "./styles";
 
 import styled from "styled-components";
