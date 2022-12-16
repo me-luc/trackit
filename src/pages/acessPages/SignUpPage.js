@@ -86,7 +86,7 @@ export default function SignUpPage() {
 			image: photo,
 			password: password,
 		});
-		request.then((answer) => handleSuccess(answer));
+		request.then((answer) => handleSuccess(answer.response));
 		request.catch((answer) => handleError(answer.response.data));
 	}
 
@@ -105,9 +105,7 @@ export default function SignUpPage() {
 			setPhotoError("Imagem inválida");
 	}
 
-	function handleSuccess() {
-		navigate("/hoje");
-	}
+	function handleSuccess(answer) {}
 
 	function switchToLogin() {
 		navigate("/");

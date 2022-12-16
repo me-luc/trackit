@@ -44,10 +44,7 @@ export default function LoginPage() {
 					onChange={updatePassword}
 				/>
 				{passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
-				<StyledButton
-					onClick={validate}
-					type="submit"
-					disabled={isLoading}>
+				<StyledButton type="submit" disabled={isLoading}>
 					{isLoading ? <Loading /> : "Entrar"}
 				</StyledButton>
 			</StyledForm>
@@ -63,10 +60,25 @@ export default function LoginPage() {
 		navigate("/cadastro");
 	}
 
+	function handleSuccess(answer) {
+		navigate("/hoje");
+	}
+
+	function handleError(answer) {
+		const message = answer.data.message;
+		setIsLoading(false);
+		setEmailError(message);
+	}
+
 	function authenticate(e) {
 		e.preventDefault();
 
-		validate();
+		if (!validateEmail()) {
+			return;
+		}
+		if (!validatePassword()) {
+			return;
+		}
 
 		setIsLoading(true);
 
@@ -74,33 +86,33 @@ export default function LoginPage() {
 			email: email,
 			password: password,
 		});
-		request.then((answer) => console.log(answer));
-		request.catch((answer) => console.log(answer));
-
-		navigate("/hoje");
-	}
-
-	function validate() {
-		validateEmail();
-		validatePassword();
+		request.then((answer) => handleSuccess(answer.data));
+		request.catch((answer) => handleError(answer.response));
 	}
 
 	function validateEmail() {
 		if (email.length === 0) {
 			setEmailError("Preencha o campo e-mail!");
+			setIsLoading(false);
+			return false;
 		}
-		var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+
+		var mailformat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
 		if (!email.match(mailformat)) {
 			setEmailError("E-mail inválido!");
-			return;
+			setIsLoading(false);
+			return false;
 		}
+		return true;
 	}
 
 	function validatePassword() {
 		if (password.length === 0) {
 			setPasswordError("Preencha o campo senha!");
-			return;
+			return false;
 		}
+		return true;
 	}
 
 	function updateEmail(event) {
