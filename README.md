@@ -44,11 +44,14 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 * JavaScript
 * React
+  - useEffect
+  - useContext
 * HTML
 * CSS
 * Styled Components
 * React Circular Progress Bar
 * React Loader Spinner
+* Axios
 
 ### `What I learned`
 
