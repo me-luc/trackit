@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ProgressBar from "../../animation/ProgressBar";
 import { accentBkg } from "../../constants/colors";
+import { UserContext } from "../../context/UserContext";
 
 export default function Menu() {
 	const percentage = 89;
+
 	return (
 		<StyledPage>
 			<Link to="/habitos">

@@ -6,17 +6,19 @@ import {
 	ErrorMessage,
 	SwitchMessage,
 } from "./styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGIN_URL } from "../../constants/URLs";
 import axios from "axios";
-
 import logo from "../../assets/logo.png";
 import Loading from "../../animation/Loading";
+import { UserContext } from "../../context/UserContext";
 
 export default function LoginPage() {
-	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(false);
+	const { user, setUser, saveUserLocally } = useContext(UserContext);
 
+	const navigate = useNavigate();
+
+	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [emailError, setEmailError] = useState("");
@@ -62,10 +64,13 @@ export default function LoginPage() {
 
 	function handleSuccess(answer) {
 		navigate("/hoje");
+		setUser(answer);
+		saveUserLocally(answer);
 	}
 
 	function handleError(answer) {
 		const message = answer.data.message;
+
 		setIsLoading(false);
 		setEmailError(message);
 	}
@@ -119,6 +124,7 @@ export default function LoginPage() {
 		setEmailError("");
 		setEmail(event.target.value);
 	}
+
 	function updatePassword(event) {
 		setPasswordError("");
 		setPassword(event.target.value);
