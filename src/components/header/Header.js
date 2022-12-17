@@ -8,23 +8,25 @@ import { UserContext } from "../../context/UserContext";
 export default function Header() {
 	const { user } = useContext(UserContext);
 
+	//let userImg = handleUserImg(user.image);
+
 	return (
 		<StyledPage>
 			<img src={headerLogo} alt="logo" />
 			<ProfileImg
-				src={() => checkUserImg(user.image)}
+				src={user.image ? user.image : errorImg}
 				alt="personal profile"
 			/>
 		</StyledPage>
 	);
 
-	function checkUserImg(img) {
-		console.log(img);
-		if (img === null || img === undefined || img.isEmpty()) {
-			return errorImg;
-		}
-		return img;
-	}
+	// function handleUserImg(img) {
+	// 	console.log(typeof img);
+	// 	if (img == null) {
+	// 		return errorImg;
+	// 	}
+	// 	return img;
+	// }
 }
 
 const StyledPage = styled.div`

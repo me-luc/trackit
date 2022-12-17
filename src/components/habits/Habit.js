@@ -8,13 +8,13 @@ import {
 } from "../../constants/colors";
 import { Title } from "./styles";
 
-export default function Habit() {
+export default function Habit({ title, currentSequence, highestSequence }) {
 	return (
 		<StyledHabit>
 			<div className="description">
-				<Title>Ler 1 capítulo de livro</Title>
-				<Info>Sequência atual: 3 dias</Info>
-				<Info>Seu recorde: 5 dias</Info>
+				<Title>{title}</Title>
+				<Info>Sequência atual: {currentSequence} dias</Info>
+				<Info>Seu recorde: {highestSequence} dias</Info>
 			</div>
 			<CheckIcon selected={false}>
 				<ion-icon name="checkmark-outline"></ion-icon>

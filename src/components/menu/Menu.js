@@ -6,7 +6,7 @@ import { accentBkg } from "../../constants/colors";
 import { UserContext } from "../../context/UserContext";
 
 export default function Menu() {
-	const percentage = 89;
+	const { progress } = useContext(UserContext);
 
 	return (
 		<StyledPage>
@@ -14,7 +14,7 @@ export default function Menu() {
 				<p>Hábitos</p>
 			</Link>
 			<Link to="/hoje">
-				<ProgressBar percentage={percentage}></ProgressBar>
+				<ProgressBar percentage={progress}></ProgressBar>
 			</Link>
 			<Link to="/historico">
 				<p>Histórico</p>

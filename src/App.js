@@ -10,20 +10,30 @@ import { UserContext } from "./context/UserContext";
 import { useState } from "react";
 
 export default function App() {
-	localStorage.setItem("userEmail", "email");
 	const [user, setUser] = useState({
-		email: localStorage.getItem("userEmail"),
-		id: localStorage.getItem("userId"),
 		image: localStorage.getItem("userImage"),
-		name: localStorage.getItem("userName"),
-		password: localStorage.getItem("userPassword"),
 		token: localStorage.getItem("userToken"),
 	});
 
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const config = {
+		headers: {
+			Authorization: `Bearer ${user.token}`,
+		},
+	};
+
+	const [progress, setProgress] = useState(10);
 
 	return (
-		<UserContext.Provider value={{ user, setUser, saveUserLocally }}>
+		<UserContext.Provider
+			value={{
+				user,
+				setUser,
+				saveTokenLocally,
+				progress,
+				setProgress,
+				config,
+			}}>
 			<BrowserRouter>
 				<GlobalStyle />
 				<Routes>
@@ -37,26 +47,19 @@ export default function App() {
 		</UserContext.Provider>
 	);
 
-	function saveUserLocally({ email, id, image, name, password, token }) {
-		console.log("EMAIL IN SAVING", email);
-		localStorage.setItem("userEmail", email);
-		localStorage.setItem("userId", id);
-		localStorage.setItem("userImage", image);
-		localStorage.setItem("userName", name);
-		localStorage.setItem("userPassword", password);
+	function saveTokenLocally({ image, token }) {
+		console.log(image);
 		localStorage.setItem("userToken", token);
+		localStorage.setItem("userImage", image);
 	}
 
 	function checkAuthentication(token) {
-		console.log(token);
-		console.log(token === null);
-		console.log(token === "");
 		if (token === null) {
-			return false;
+			setIsAuthenticated(false);
 		}
 		if (token === "") {
-			return false;
+			setIsAuthenticated(false);
 		}
-		return true;
+		setIsAuthenticated(true);
 	}
 }

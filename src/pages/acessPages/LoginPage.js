@@ -14,7 +14,7 @@ import Loading from "../../animation/Loading";
 import { UserContext } from "../../context/UserContext";
 
 export default function LoginPage() {
-	const { user, setUser, saveUserLocally } = useContext(UserContext);
+	const { user, setUser, saveTokenLocally } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ export default function LoginPage() {
 	function handleSuccess(answer) {
 		navigate("/hoje");
 		setUser(answer);
-		saveUserLocally(answer);
+		saveTokenLocally(answer);
 	}
 
 	function handleError(answer) {
