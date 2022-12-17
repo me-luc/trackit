@@ -7,8 +7,20 @@ import {
 	textColor,
 } from "../../constants/colors";
 import { Title } from "./styles";
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
 
-export default function Habit({ title, currentSequence, highestSequence }) {
+export default function Habit({
+	id,
+	title,
+	currentSequence,
+	highestSequence,
+	isSelected,
+	selected,
+	setSelected,
+	habits,
+}) {
+	const { setProgress } = useContext(UserContext);
 	return (
 		<StyledHabit>
 			<div className="description">
@@ -16,11 +28,25 @@ export default function Habit({ title, currentSequence, highestSequence }) {
 				<Info>Sequência atual: {currentSequence} dias</Info>
 				<Info>Seu recorde: {highestSequence} dias</Info>
 			</div>
-			<CheckIcon selected={false}>
+			<CheckIcon isSelected={isSelected} onClick={handleClick}>
 				<ion-icon name="checkmark-outline"></ion-icon>
 			</CheckIcon>
 		</StyledHabit>
 	);
+
+	function handleClick() {
+		if (!isSelected) {
+			const newArr = [...selected, id];
+			setSelected(newArr);
+		} else {
+			const newArr = selected.filter((el) => el !== id);
+			setSelected(newArr);
+		}
+		console.log("CONSOLE", selected.length / habits.length);
+		console.log("SELEC", selected.length);
+		console.log("HABITS", habits.length);
+		setProgress(selected.length / habits.length);
+	}
 }
 
 const CheckIcon = styled.div`
@@ -29,7 +55,7 @@ const CheckIcon = styled.div`
 	left: 276px;
 	top: 190px;
 
-	background: ${({ selected }) => (selected ? green : lightGray)};
+	background: ${({ isSelected }) => (isSelected ? green : lightGray)};
 	border: 1px solid ${detailGray};
 	border-radius: 7px;
 	cursor: pointer;

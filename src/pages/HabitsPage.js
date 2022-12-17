@@ -6,10 +6,12 @@ import HabitEdit from "../components/habits/HabitEdit";
 import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
 import HabitInfo from "../components/habits/HabitInfo";
+import Authenticate from "../auth/Authenticate";
 
 export default function HabitsPage() {
 	return (
 		<>
+			<Authenticate />
 			<Header />
 			<StyledPage>
 				<NewHabitBox>

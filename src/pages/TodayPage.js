@@ -9,54 +9,31 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { TODAY_HABITS_URL } from "../constants/URLs";
 import Loading from "../animation/Loading";
+import Authenticate from "../auth/Authenticate";
 
 export default function TodayPage() {
-	const { progress, config } = useContext(UserContext);
+	const { progress, config, user } = useContext(UserContext);
+
+	Authenticate();
+
+	const [selected, setSelected] = useState([]);
 
 	require("dayjs/locale/pt-br");
 	const dayjs = require("dayjs");
 	let CURRENT_DATE = dayjs().locale("pt-br").format("dddd DD/MM");
 	CURRENT_DATE = formatDateStr(CURRENT_DATE);
 
-	const mock = [
-		{
-			id: 3,
-			name: "Acordar 1",
-			done: true,
-			currentSequence: 1,
-			highestSequence: 1,
-		},
-		{
-			id: 3,
-			name: "Acordar 2",
-			done: true,
-			currentSequence: 1,
-			highestSequence: 1,
-		},
-		{
-			id: 3,
-			name: "Acordar 3",
-			done: true,
-			currentSequence: 1,
-			highestSequence: 1,
-		},
-		{
-			id: 3,
-			name: "Acordar 4",
-			done: true,
-			currentSequence: 1,
-			highestSequence: 1,
-		},
-	];
-
-	const [habits, setHabits] = useState(mock);
+	const [habits, setHabits] = useState(null);
 	useEffect(() => {
 		const request = axios.get(TODAY_HABITS_URL, config);
 		request.then((answer) => console.log(answer));
 	}, []);
 
+	console.log(progress);
+
 	return (
 		<>
+			<Authenticate />
 			<Header />
 			<StyledPage>
 				<Title>{CURRENT_DATE}</Title>
@@ -74,8 +51,13 @@ export default function TodayPage() {
 					{habits &&
 						habits.map((habit) => (
 							<Habit
+								selected={selected}
+								setSelected={setSelected}
+								isSelected={selected.includes(habit.id)}
 								key={habit.id}
+								id={habit.id}
 								title={habit.name}
+								habits={habits}
 								currentSequence={habit.currentSequence}
 								highestSequence={habit.highestSequence}
 							/>
@@ -91,7 +73,7 @@ export default function TodayPage() {
 		newStr[0] = newStr[0].toUpperCase();
 
 		for (let i = 0; i < newStr.length; i++) {
-			if (newStr[i] == " ") {
+			if (newStr[i] === " ") {
 				newStr[i] = ", ";
 			}
 		}

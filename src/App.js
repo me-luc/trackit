@@ -15,14 +15,13 @@ export default function App() {
 		token: localStorage.getItem("userToken"),
 	});
 
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const config = {
 		headers: {
 			Authorization: `Bearer ${user.token}`,
 		},
 	};
 
-	const [progress, setProgress] = useState(10);
+	const [progress, setProgress] = useState(0);
 
 	return (
 		<UserContext.Provider
@@ -51,15 +50,5 @@ export default function App() {
 		console.log(image);
 		localStorage.setItem("userToken", token);
 		localStorage.setItem("userImage", image);
-	}
-
-	function checkAuthentication(token) {
-		if (token === null) {
-			setIsAuthenticated(false);
-		}
-		if (token === "") {
-			setIsAuthenticated(false);
-		}
-		setIsAuthenticated(true);
 	}
 }

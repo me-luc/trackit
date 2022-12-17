@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Authenticate from "../auth/Authenticate";
 import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
 import { PageModel, Text, Title } from "./styles";
@@ -6,6 +7,7 @@ import { PageModel, Text, Title } from "./styles";
 export default function HistoryPage() {
 	return (
 		<>
+			<Authenticate />
 			<Header />
 
 			<StyledPage>
