@@ -36,6 +36,8 @@ export default function TodayPage() {
 		setProgress(((doneCount / habits.length) * 100).toFixed(0));
 	}
 
+	console.log(habits);
+
 	return (
 		<>
 			<Authenticate />

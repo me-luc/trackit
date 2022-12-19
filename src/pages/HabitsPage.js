@@ -19,14 +19,8 @@ export default function HabitsPage() {
 	const { config } = useContext(UserContext);
 
 	useEffect(() => {
-		const request = axios.get(STORAGE_URL, config);
-		request.then((answer) => setHabits(answer.data));
-		request.catch((answer) => console.log(answer));
+		loadHabits();
 	}, []);
-
-	if (!habits) {
-		return;
-	}
 
 	return (
 		<>
@@ -40,25 +34,31 @@ export default function HabitsPage() {
 					</NewIcon>
 				</NewHabitBox>
 
-				{isAddingNew && <HabitEdit setIsAddingNew={setIsAddingNew} />}
+				{isAddingNew && (
+					<HabitEdit
+						setIsAddingNew={setIsAddingNew}
+						loadHabits={loadHabits}
+					/>
+				)}
 
-				{/* {!habits && (
+				{!habits && (
 					<NoHabitText>
 						Você não tem nenhum hábito cadastrado ainda. Adicione um
 						hábito para começar a trackear!
 					</NoHabitText>
 				)}
 
-				{!habits && <Loading />} */}
+				{!habits && <Loading />}
 
 				{habits !== null && (
 					<HabitsBox>
-						<p>ESTE</p>
-						<HabitInfo />
-						{habits.map((habit) => {
-							// /console.log(habit);
-							return <HabitInfo habit={habit} key={habit.id} />;
-						})}
+						{habits.map((habit) => (
+							<HabitInfo
+								habit={habit}
+								key={habit.id}
+								loadHabits={loadHabits}
+							/>
+						))}
 					</HabitsBox>
 				)}
 			</StyledPage>
@@ -68,6 +68,12 @@ export default function HabitsPage() {
 
 	function addNew() {
 		setIsAddingNew(true);
+	}
+
+	function loadHabits() {
+		const request = axios.get(STORAGE_URL, config);
+		request.then((answer) => setHabits(answer.data));
+		request.catch((answer) => alert(answer.data.message));
 	}
 }
 

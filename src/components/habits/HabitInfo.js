@@ -1,25 +1,40 @@
 import styled from "styled-components";
 import { DayButton, Title } from "./styles";
 import { accentBkg } from "../../constants/colors";
+import axios from "axios";
+import { BASE_URL } from "../../constants/URLs";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
-export default function HabitInfo({ habit }) {
-	const weekdays = ["S", "T", "Q", "Q", "S", "S", "D"];
+export default function HabitInfo({ habit, loadHabits }) {
+	const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+	const { name, days, id } = habit;
+	const { config } = useContext(UserContext);
 
 	return (
 		<StyledHabit>
 			<TitleAndOptionBox>
-				<Title></Title>
-				<ion-icon name="trash" />
+				<Title>{name}</Title>
+				<div onClick={deleteHabit}>
+					<ion-icon name="trash" />
+				</div>
 			</TitleAndOptionBox>
+
 			<WeekDaysBox>
-				{weekdays.map((day) => (
-					<DayButton isSelected={true} disabled>
+				{weekdays.map((day, index) => (
+					<DayButton isSelected={days.includes(index)} disabled>
 						{day}
 					</DayButton>
 				))}
 			</WeekDaysBox>
 		</StyledHabit>
 	);
+
+	function deleteHabit() {
+		const request = axios.delete(`${BASE_URL}/habits/${id}`, config);
+		request.then(() => loadHabits());
+		request.catch((answer) => console.log(answer));
+	}
 }
 
 const StyledHabit = styled.div`

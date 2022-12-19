@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import {
 	accentBkg,
@@ -8,21 +8,39 @@ import {
 } from "../../constants/colors";
 import Loading from "../../animation/Loading";
 import { DayButton } from "./styles";
+import axios from "axios";
+import { BASE_URL, STORAGE_URL } from "../../constants/URLs";
+import { UserContext } from "../../context/UserContext";
 
-export default function HabitEdit({ setIsAddingNew }) {
+export default function HabitEdit({ setIsAddingNew, loadHabits }) {
 	const previousTitle = localStorage.getItem("title");
-	const previousDays = localStorage.getItem("days");
-	const weekdays = ["S", "T", "Q", "Q", "S", "S", "D"];
+	let stringDaysData = localStorage.getItem("days");
+	const previousDays = JSON.parse(stringDaysData);
+
+	const { config } = useContext(UserContext);
+
+	const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+
 	const [isLoading, setIsLoading] = useState(false);
+	const [name, setName] = useState(previousTitle || "");
+	const [days, setDays] = useState(previousDays || []);
 
 	return (
 		<StyledHabit>
 			<form onSubmit={save}>
-				<StyledInput placeholder="nome do hábito" />
+				<StyledInput
+					placeholder="nome do hábito"
+					value={name}
+					onChange={(e) => saveName(e)}
+				/>
 
 				<WeekDaysBox>
-					{weekdays.map((day) => (
-						<DayButton type="button" isSelected={true}>
+					{weekdays.map((day, index) => (
+						<DayButton
+							type="button"
+							isSelected={days.includes(index)}
+							value={days}
+							onClick={() => handleClick(index)}>
 							{day}
 						</DayButton>
 					))}
@@ -41,10 +59,56 @@ export default function HabitEdit({ setIsAddingNew }) {
 	function save(e) {
 		e.preventDefault();
 		setIsLoading(true);
+
+		const request = axios.post(
+			STORAGE_URL,
+			{
+				name: name,
+				days: days,
+			},
+			config
+		);
+		request.then(() => {
+			loadHabits();
+			setIsLoading(false);
+			setIsAddingNew(false);
+			resetForm();
+		});
+		request.catch((answer) => console.log(answer));
+	}
+
+	function handleClick(dayNumber) {
+		if (!days.includes(dayNumber)) {
+			const newArr = [...days, dayNumber];
+			setDays(newArr.sort());
+			localStorage.setItem("days", JSON.stringify(newArr));
+		} else {
+			const index = [...days].indexOf(dayNumber);
+
+			if (index > -1) {
+				const newArr = [...days];
+				newArr.splice(index, 1);
+				setDays(newArr.sort());
+				localStorage.setItem("days", JSON.stringify(newArr));
+			}
+		}
 	}
 
 	function cancel() {
 		setIsAddingNew(false);
+	}
+
+	function resetForm() {
+		setName("");
+		setDays([]);
+		localStorage.setItem("title", "");
+		localStorage.setItem("days", "[]");
+	}
+
+	function saveName(e) {
+		const newName = e.target.value;
+		setName(newName);
+		localStorage.setItem("title", newName);
 	}
 }
 
