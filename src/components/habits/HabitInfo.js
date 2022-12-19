@@ -2,17 +2,20 @@ import styled from "styled-components";
 import { DayButton, Title } from "./styles";
 import { accentBkg } from "../../constants/colors";
 
-export default function HabitInfo() {
+export default function HabitInfo({ habit }) {
 	const weekdays = ["S", "T", "Q", "Q", "S", "S", "D"];
+
 	return (
 		<StyledHabit>
 			<TitleAndOptionBox>
-				<Title>Ler 1 capítulo de livro</Title>
-				<ion-icon name="trash"></ion-icon>
+				<Title></Title>
+				<ion-icon name="trash" />
 			</TitleAndOptionBox>
 			<WeekDaysBox>
 				{weekdays.map((day) => (
-					<DayButton isSelected={true}>{day}</DayButton>
+					<DayButton isSelected={true} disabled>
+						{day}
+					</DayButton>
 				))}
 			</WeekDaysBox>
 		</StyledHabit>

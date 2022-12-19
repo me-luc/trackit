@@ -20,6 +20,10 @@ export const DayButton = styled.button`
 	line-height: 25px;
 	color: ${({ isSelected }) => (isSelected ? `${accentBkg}` : `${midGray}`)};
 	margin-right: 5px;
+
+	:disabled {
+		cursor: initial;
+	}
 `;
 
 export const Title = styled.h1`

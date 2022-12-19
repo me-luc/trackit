@@ -8,8 +8,6 @@ import { UserContext } from "../../context/UserContext";
 export default function Header() {
 	const { user } = useContext(UserContext);
 
-	//let userImg = handleUserImg(user.image);
-
 	return (
 		<StyledPage>
 			<img src={headerLogo} alt="logo" />
@@ -20,6 +18,7 @@ export default function Header() {
 		</StyledPage>
 	);
 
+	//let userImg = handleUserImg(user.image);
 	// function handleUserImg(img) {
 	// 	console.log(typeof img);
 	// 	if (img == null) {

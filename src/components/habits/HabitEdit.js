@@ -9,24 +9,28 @@ import {
 import Loading from "../../animation/Loading";
 import { DayButton } from "./styles";
 
-export default function HabitEdit() {
+export default function HabitEdit({ setIsAddingNew }) {
+	const previousTitle = localStorage.getItem("title");
+	const previousDays = localStorage.getItem("days");
 	const weekdays = ["S", "T", "Q", "Q", "S", "S", "D"];
 	const [isLoading, setIsLoading] = useState(false);
 
 	return (
 		<StyledHabit>
-			<form action="">
+			<form onSubmit={save}>
 				<StyledInput placeholder="nome do hábito" />
 
 				<WeekDaysBox>
 					{weekdays.map((day) => (
-						<DayButton isSelected={true}>{day}</DayButton>
+						<DayButton type="button" isSelected={true}>
+							{day}
+						</DayButton>
 					))}
 				</WeekDaysBox>
 
 				<OptionsBox>
-					<CancelOption>Cancelar</CancelOption>
-					<SaveOption onClick={save} disabled={isLoading}>
+					<CancelOption onClick={cancel}>Cancelar</CancelOption>
+					<SaveOption type="submit" disabled={isLoading}>
 						{isLoading ? <Loading width={50} /> : "Salvar"}
 					</SaveOption>
 				</OptionsBox>
@@ -37,6 +41,10 @@ export default function HabitEdit() {
 	function save(e) {
 		e.preventDefault();
 		setIsLoading(true);
+	}
+
+	function cancel() {
+		setIsAddingNew(false);
 	}
 }
 

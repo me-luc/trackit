@@ -8,44 +8,84 @@ import {
 } from "../../constants/colors";
 import { Title } from "./styles";
 import { UserContext } from "../../context/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../constants/URLs";
+import Loading from "../../animation/Loading";
 
-export default function Habit({
-	id,
-	title,
-	currentSequence,
-	highestSequence,
-	isSelected,
-	selected,
-	setSelected,
-	habits,
-}) {
-	const { setProgress } = useContext(UserContext);
+export default function Habit({ habit, loadHabits }) {
+	const { config } = useContext(UserContext);
+
+	const [isLoading, setIsloading] = useState(false);
+
+	const {
+		currentSequence,
+		done: isSelected,
+		highestSequence,
+		id,
+		name,
+	} = habit;
+
+	const isEqual =
+		currentSequence === highestSequence && currentSequence !== 0;
+
 	return (
 		<StyledHabit>
 			<div className="description">
-				<Title>{title}</Title>
-				<Info>Sequência atual: {currentSequence} dias</Info>
-				<Info>Seu recorde: {highestSequence} dias</Info>
+				<Title>{name}</Title>
+				<Info isEqual={isEqual}>
+					Sequência atual:{" "}
+					<span>
+						{currentSequence} dia{currentSequence !== 1 && "s"}
+					</span>
+				</Info>
+				<Info isEqual={isEqual}>
+					Seu recorde:{" "}
+					<span>
+						{highestSequence} dia{highestSequence !== 1 && "s"}
+					</span>
+				</Info>
 			</div>
-			<CheckIcon isSelected={isSelected} onClick={handleClick}>
-				<ion-icon name="checkmark-outline"></ion-icon>
+			<CheckIcon
+				isSelected={isSelected}
+				onClick={handleClick}
+				isLoading={isLoading}
+				disabled={isLoading}>
+				{isLoading ? (
+					<Loading width={50} />
+				) : (
+					<ion-icon name="checkmark-outline" />
+				)}
 			</CheckIcon>
 		</StyledHabit>
 	);
 
 	function handleClick() {
 		if (!isSelected) {
-			const newArr = [...selected, id];
-			setSelected(newArr);
+			setIsloading(true);
+			const request = axios.post(
+				`${BASE_URL}/habits/${id}/check`,
+				{},
+				config
+			);
+			request.then(function () {
+				loadHabits();
+				setIsloading(false);
+			});
+			request.catch((answer) => alert(answer.message));
 		} else {
-			const newArr = selected.filter((el) => el !== id);
-			setSelected(newArr);
+			setIsloading(true);
+			const request = axios.post(
+				`${BASE_URL}/habits/${id}/uncheck`,
+				{},
+				config
+			);
+			request.then(function () {
+				loadHabits();
+				setIsloading(false);
+			});
+			request.catch((answer) => alert(answer.message));
 		}
-		console.log("CONSOLE", selected.length / habits.length);
-		console.log("SELEC", selected.length);
-		console.log("HABITS", habits.length);
-		setProgress(selected.length / habits.length);
 	}
 }
 
@@ -58,7 +98,7 @@ const CheckIcon = styled.div`
 	background: ${({ isSelected }) => (isSelected ? green : lightGray)};
 	border: 1px solid ${detailGray};
 	border-radius: 7px;
-	cursor: pointer;
+	cursor: ${({ isLoading }) => (isLoading ? "not-allowed" : "pointer")};
 
 	display: flex;
 	justify-content: center;
@@ -97,6 +137,9 @@ const Info = styled.p`
 	font-weight: 500;
 	font-size: 12.976px;
 	line-height: 16px;
-
 	color: ${textColor};
+
+	span {
+		color: ${({ isEqual }) => (isEqual ? green : textColor)};
+	}
 `;

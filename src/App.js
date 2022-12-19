@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import GlobalStyle from "./globalStyle";
 import HabitsPage from "./pages/HabitsPage";
-import HistoryPage from "./pages/HistoryPage";
+import StoragePage from "./pages/StoragePage";
 import LoginPage from "./pages/acessPages/LoginPage";
 import SignUpPage from "./pages/acessPages/SignUpPage";
 import TodayPage from "./pages/TodayPage";
@@ -14,14 +14,13 @@ export default function App() {
 		image: localStorage.getItem("userImage"),
 		token: localStorage.getItem("userToken"),
 	});
+	const [progress, setProgress] = useState(0);
 
 	const config = {
 		headers: {
 			Authorization: `Bearer ${user.token}`,
 		},
 	};
-
-	const [progress, setProgress] = useState(0);
 
 	return (
 		<UserContext.Provider
@@ -40,7 +39,7 @@ export default function App() {
 					<Route path="/cadastro" element={<SignUpPage />} />
 					<Route path="/habitos" element={<HabitsPage />} />
 					<Route path="/hoje" element={<TodayPage />} />
-					<Route path="/historico" element={<HistoryPage />} />
+					<Route path="/historico" element={<StoragePage />} />
 				</Routes>
 			</BrowserRouter>
 		</UserContext.Provider>

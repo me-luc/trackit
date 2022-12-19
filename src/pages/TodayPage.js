@@ -12,9 +12,7 @@ import Loading from "../animation/Loading";
 import Authenticate from "../auth/Authenticate";
 
 export default function TodayPage() {
-	const { progress, config, user } = useContext(UserContext);
-
-	Authenticate();
+	const { progress, setProgress, config } = useContext(UserContext);
 
 	const [selected, setSelected] = useState([]);
 
@@ -24,12 +22,19 @@ export default function TodayPage() {
 	CURRENT_DATE = formatDateStr(CURRENT_DATE);
 
 	const [habits, setHabits] = useState(null);
+
 	useEffect(() => {
-		const request = axios.get(TODAY_HABITS_URL, config);
-		request.then((answer) => console.log(answer));
+		loadHabits();
 	}, []);
 
-	console.log(progress);
+	if (habits) {
+		let doneCount = 0;
+		habits.map((habit) => {
+			if (habit.done) doneCount++;
+		});
+		console.log(doneCount / habits.length);
+		setProgress(((doneCount / habits.length) * 100).toFixed(0));
+	}
 
 	return (
 		<>
@@ -46,23 +51,21 @@ export default function TodayPage() {
 					<NoHabitText>Nenhum hábito concluído ainda</NoHabitText>
 				)}
 
-				<HabitsBox>
-					{!habits && <Loading />}
-					{habits &&
-						habits.map((habit) => (
+				{habits === null ? (
+					<Loading />
+				) : (
+					<HabitsBox>
+						{habits.map((habit) => (
 							<Habit
+								loadHabits={loadHabits}
 								selected={selected}
 								setSelected={setSelected}
-								isSelected={selected.includes(habit.id)}
+								habit={habit}
 								key={habit.id}
-								id={habit.id}
-								title={habit.name}
-								habits={habits}
-								currentSequence={habit.currentSequence}
-								highestSequence={habit.highestSequence}
 							/>
 						))}
-				</HabitsBox>
+					</HabitsBox>
+				)}
 			</StyledPage>
 			<Menu />
 		</>
@@ -78,6 +81,12 @@ export default function TodayPage() {
 			}
 		}
 		return newStr.join("");
+	}
+
+	function loadHabits() {
+		const request = axios.get(TODAY_HABITS_URL, config);
+		request.then((answer) => setHabits(answer.data));
+		request.catch((answer) => setHabits(answer.data));
 	}
 }
 

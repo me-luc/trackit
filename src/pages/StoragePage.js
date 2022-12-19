@@ -4,7 +4,7 @@ import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
 import { PageModel, Text, Title } from "./styles";
 
-export default function HistoryPage() {
+export default function StoragePage() {
 	return (
 		<>
 			<Authenticate />
