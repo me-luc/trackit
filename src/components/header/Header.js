@@ -9,7 +9,7 @@ export default function Header() {
   const { user } = useContext(UserContext);
 
   return (
-    <StyledPage>
+    <StyledPage data-test="header">
       <img src={headerLogo} alt="logo" />
       <ProfileImg
         data-identifier="avatar"

@@ -9,7 +9,7 @@ export default function Menu() {
   const { progress } = useContext(UserContext);
 
   return (
-    <StyledPage>
+    <StyledPage data-test="menu">
       <Link to="/habitos">
         <p data-identifier="habit-page-action">Hábitos</p>
       </Link>

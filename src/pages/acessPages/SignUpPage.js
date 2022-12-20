@@ -88,7 +88,6 @@ export default function SignUpPage() {
 
   function signUp(e) {
     e.preventDefault();
-    setIsLoading(true);
 
     if (!validateEmail()) {
       return;
@@ -102,6 +101,8 @@ export default function SignUpPage() {
     if (!validatePhoto()) {
       return;
     }
+	
+	setIsLoading(true);
 
     const request = axios.post(SIGNUP_URL, {
       email: email,
@@ -130,7 +131,9 @@ export default function SignUpPage() {
     if (details && details.includes("image")) setPhotoError("Imagem inválida");
   }
 
-  function handleSuccess(answer) {}
+  function handleSuccess(answer) {
+	  switchToLogin();
+  }
 
   function switchToLogin() {
     navigate("/");
@@ -139,7 +142,7 @@ export default function SignUpPage() {
   function validateEmail() {
     if (email.length === 0) {
       setEmailError("Preencha o campo e-mail!");
-      setIsLoading(false);
+     // setIsLoading(false);
       return false;
     }
 
@@ -147,7 +150,7 @@ export default function SignUpPage() {
 
     if (!email.match(mailformat)) {
       setEmailError("E-mail inválido!");
-      setIsLoading(false);
+     // setIsLoading(false);
       return false;
     }
     return true;
@@ -156,12 +159,12 @@ export default function SignUpPage() {
   function validatePassword() {
     if (password.length === 0) {
       setPasswordError("Preencha o campo senha!");
-      setIsLoading(false);
+     // setIsLoading(false);
       return false;
     }
     if (password.length < 8) {
       setPasswordError("Senha deve ter pelo menos 8 caracteres");
-      setIsLoading(false);
+     // setIsLoading(false);
       return false;
     }
     return true;
@@ -170,7 +173,7 @@ export default function SignUpPage() {
   function validatePhoto() {
     if (photo.length === 0) {
       setPhotoError("Preencha o campo da foto!");
-      setIsLoading(false);
+      //setIsLoading(false);
       return false;
     }
     return true;
@@ -179,7 +182,7 @@ export default function SignUpPage() {
   function validateName() {
     if (name.length === 0) {
       setNameError("Preencha o campo do nome!");
-      setIsLoading(false);
+      //setIsLoading(false);
       return false;
     }
     return true;
