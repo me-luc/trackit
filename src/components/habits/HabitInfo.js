@@ -7,69 +7,66 @@ import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 
 export default function HabitInfo({ habit, loadHabits }) {
-	const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
-	const { name, days, id } = habit;
-	const { config } = useContext(UserContext);
+  const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+  const { name, days, id } = habit;
+  const { config } = useContext(UserContext);
 
-	return (
-		<StyledHabit>
-			<TitleAndOptionBox>
-				<Title>{name}</Title>
-				<div onClick={deleteHabit}>
-					<ion-icon name="trash" />
-				</div>
-			</TitleAndOptionBox>
+  return (
+    <StyledHabit data-identifier="today-infos">
+      <TitleAndOptionBox>
+        <Title data-identifier="habit-name">{name}</Title>
+        <div data-identifier="delete-habit-btn" onClick={deleteHabit}>
+          <ion-icon name="trash" />
+        </div>
+      </TitleAndOptionBox>
 
-			<WeekDaysBox>
-				{weekdays.map((day, index) => (
-					<DayButton
-						key={index}
-						isSelected={days.includes(index)}
-						disabled>
-						{day}
-					</DayButton>
-				))}
-			</WeekDaysBox>
-		</StyledHabit>
-	);
+      <WeekDaysBox>
+        {weekdays.map((day, index) => (
+          <DayButton key={index} isSelected={days.includes(index)} disabled>
+            {day}
+          </DayButton>
+        ))}
+      </WeekDaysBox>
+    </StyledHabit>
+  );
 
-	function deleteHabit() {
-		if (window.confirm("Realmente deseja apagar?") === true) {
-			const request = axios.delete(`${BASE_URL}/habits/${id}`, config);
-			request.then(() => loadHabits());
-			request.catch((answer) => console.log(answer));
-		}
-	}
+  function deleteHabit() {
+    if (window.confirm("Realmente deseja apagar?") === true) {
+      const request = axios.delete(`${BASE_URL}/habits/${id}`, config);
+      request.then(() => loadHabits());
+      request.catch((answer) => console.log(answer));
+    }
+  }
 }
 
 const StyledHabit = styled.div`
-	width: 100%;
-	min-width: 290px;
+  width: 100%;
+  min-width: 290px;
 
-	background: ${accentBkg};
-	border-radius: 5px;
-	box-sizing: border-box;
-	padding: 20px;
-	margin-bottom: 10px;
+  background: ${accentBkg};
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-bottom: 10px;
 
-	@media (min-width: 750px) {
-		width: 500px;
-	}
+  @media (min-width: 750px) {
+    width: 500px;
+  }
 `;
 
 const WeekDaysBox = styled.div`
-	display: flex;
+  display: flex;
 `;
 
 const TitleAndOptionBox = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-	ion-icon {
-		cursor: pointer;
-		font-size: 20px;
-		--ionicon-stroke-width: 50px;
-		margin-bottom: 10px;
-	}
+  ion-icon {
+    cursor: pointer;
+    font-size: 20px;
+    --ionicon-stroke-width: 50px;
+    margin-bottom: 10px;
+  }
 `;
