@@ -26,9 +26,10 @@ export default function HabitEdit({ setIsAddingNew, loadHabits }) {
 	const [days, setDays] = useState(previousDays || []);
 
 	return (
-		<StyledHabit>
+		<StyledHabit data-test="habit-create-container">
 			<form onSubmit={save}>
-				<StyledInput data-identifier="input-habit-name"
+				<StyledInput
+					data-test="habit-name-input"
 					placeholder="nome do hábito"
 					value={name}
 					onChange={(e) => saveName(e)}
@@ -37,7 +38,8 @@ export default function HabitEdit({ setIsAddingNew, loadHabits }) {
 
 				<WeekDaysBox>
 					{weekdays.map((day, index) => (
-						<DayButton data-identifier="week-day-btn"
+						<DayButton
+							data-test="habit-day"
 							key={index}
 							type="button"
 							isSelected={days.includes(index)}
@@ -50,8 +52,15 @@ export default function HabitEdit({ setIsAddingNew, loadHabits }) {
 				</WeekDaysBox>
 
 				<OptionsBox>
-					<CancelOption data-identifier="cancel-habit-create-btn" onClick={cancel}>Cancelar</CancelOption>
-					<SaveOption data-identifier="save-habit-create-btn" type="submit" disabled={isLoading}>
+					<CancelOption
+						data-test="habit-create-cancel-btn"
+						onClick={cancel}>
+						Cancelar
+					</CancelOption>
+					<SaveOption
+						data-test="habit-create-save-btn"
+						type="submit"
+						disabled={isLoading}>
 						{isLoading ? <Loading width={50} /> : "Salvar"}
 					</SaveOption>
 				</OptionsBox>

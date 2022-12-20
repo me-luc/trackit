@@ -29,7 +29,7 @@ export default function HabitsPage() {
 			<StyledPage>
 				<NewHabitBox>
 					<Title>Meus hábitos</Title>
-					<NewIcon onClick={addNew} data-test="create-habit-btn">
+					<NewIcon onClick={addNew} data-test="habit-create-btn">
 						<ion-icon name="add-outline"></ion-icon>
 					</NewIcon>
 				</NewHabitBox>
