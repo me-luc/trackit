@@ -34,10 +34,10 @@ export default function TodayPage() {
 			<Authenticate />
 			<Header />
 			<StyledPage>
-				<Title data-identifier="today-infos">{CURRENT_DATE}</Title>
+				<Title data-identifier="today">{CURRENT_DATE}</Title>
 
 				{progress > 0 ? (
-					<ProgressText data-identifier="today-infos">
+					<ProgressText data-test="today-counter">
 						{progress}% dos hábitos concluídos
 					</ProgressText>
 				) : (
@@ -47,7 +47,7 @@ export default function TodayPage() {
 				{habits === null ? (
 					<Loading />
 				) : (
-					<HabitsBox>
+					<HabitsBox data-test="today-habit-container">
 						{habits.map((habit) => (
 							<Habit
 								loadHabits={loadHabits}
