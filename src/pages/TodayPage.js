@@ -27,16 +27,7 @@ export default function TodayPage() {
 		loadHabits();
 	}, []);
 
-	if (habits) {
-		let doneCount = 0;
-		habits.map((habit) => {
-			if (habit.done) doneCount++;
-		});
-		console.log(doneCount / habits.length);
-		setProgress(((doneCount / habits.length) * 100).toFixed(0));
-	}
-
-	console.log(habits);
+	updateProgress();
 
 	return (
 		<>
@@ -69,7 +60,7 @@ export default function TodayPage() {
 					</HabitsBox>
 				)}
 			</StyledPage>
-			<Menu />
+			<Menu updateProgress={updateProgress} />
 		</>
 	);
 
@@ -87,8 +78,24 @@ export default function TodayPage() {
 
 	function loadHabits() {
 		const request = axios.get(TODAY_HABITS_URL, config);
-		request.then((answer) => setHabits(answer.data));
-		request.catch((answer) => setHabits(answer.data));
+		request.then((answer) => {
+			setHabits(answer.data);
+			updateProgress();
+		});
+		request.catch((answer) => console.log(answer));
+	}
+
+	function updateProgress() {
+		if (!habits) return;
+
+		let habitsDone = 0;
+		habits.map((habit) => {
+			if (habit.done) habitsDone++;
+		});
+		const newProgress = ((habitsDone / habits.length) * 100).toFixed(0);
+
+		if (newProgress === progress) return;
+		setProgress(newProgress);
 	}
 }
 

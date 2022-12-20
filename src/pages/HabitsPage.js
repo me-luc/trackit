@@ -41,7 +41,7 @@ export default function HabitsPage() {
 					/>
 				)}
 
-				{!habits && (
+				{(!habits || habits === undefined || habits.length === 0) && (
 					<NoHabitText>
 						Você não tem nenhum hábito cadastrado ainda. Adicione um
 						hábito para começar a trackear!
@@ -112,6 +112,7 @@ const NewIcon = styled.div`
 const NewHabitBox = styled.div`
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 5px;
 
 	@media (min-width: 750px) {
 		width: 500px;

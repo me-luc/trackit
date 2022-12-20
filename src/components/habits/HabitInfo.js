@@ -22,7 +22,10 @@ export default function HabitInfo({ habit, loadHabits }) {
 
 			<WeekDaysBox>
 				{weekdays.map((day, index) => (
-					<DayButton isSelected={days.includes(index)} disabled>
+					<DayButton
+						key={index}
+						isSelected={days.includes(index)}
+						disabled>
 						{day}
 					</DayButton>
 				))}
@@ -31,9 +34,11 @@ export default function HabitInfo({ habit, loadHabits }) {
 	);
 
 	function deleteHabit() {
-		const request = axios.delete(`${BASE_URL}/habits/${id}`, config);
-		request.then(() => loadHabits());
-		request.catch((answer) => console.log(answer));
+		if (window.confirm("Realmente deseja apagar?") === true) {
+			const request = axios.delete(`${BASE_URL}/habits/${id}`, config);
+			request.then(() => loadHabits());
+			request.catch((answer) => console.log(answer));
+		}
 	}
 }
 

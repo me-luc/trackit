@@ -70,7 +70,7 @@ export default function LoginPage() {
 
 	function handleError(answer) {
 		const message = answer.data.message;
-
+		alert(message);
 		setIsLoading(false);
 		setEmailError(message);
 	}

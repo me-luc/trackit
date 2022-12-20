@@ -33,21 +33,33 @@ export default function SignUpPage() {
 					type="email"
 					placeholder="e-mail"
 					onChange={updateEmail}
+					disabled={isLoading}
 				/>
 				{emailError && <ErrorMessage>{emailError}</ErrorMessage>}
 				<input
 					type="password"
 					placeholder="senha"
 					onChange={updatePassword}
+					disabled={isLoading}
 				/>
 
 				{passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
 
-				<input type="text" placeholder="nome" onChange={updateName} />
+				<input
+					type="text"
+					placeholder="nome"
+					onChange={updateName}
+					disabled={isLoading}
+				/>
 
 				{nameError && <ErrorMessage>{nameError}</ErrorMessage>}
 
-				<input type="text" placeholder="foto" onChange={updatePhoto} />
+				<input
+					type="text"
+					placeholder="foto"
+					onChange={updatePhoto}
+					disabled={isLoading}
+				/>
 
 				{photoError && <ErrorMessage>{photoError}</ErrorMessage>}
 
@@ -94,6 +106,9 @@ export default function SignUpPage() {
 		setIsLoading(false);
 
 		const message = data.message;
+
+		alert(message);
+
 		let details = null;
 
 		if (data.details) {

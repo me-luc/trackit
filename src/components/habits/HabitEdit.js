@@ -32,14 +32,17 @@ export default function HabitEdit({ setIsAddingNew, loadHabits }) {
 					placeholder="nome do hábito"
 					value={name}
 					onChange={(e) => saveName(e)}
+					disabled={isLoading}
 				/>
 
 				<WeekDaysBox>
 					{weekdays.map((day, index) => (
 						<DayButton
+							key={index}
 							type="button"
 							isSelected={days.includes(index)}
 							value={days}
+							disabled={isLoading}
 							onClick={() => handleClick(index)}>
 							{day}
 						</DayButton>
@@ -74,7 +77,10 @@ export default function HabitEdit({ setIsAddingNew, loadHabits }) {
 			setIsAddingNew(false);
 			resetForm();
 		});
-		request.catch((answer) => console.log(answer));
+		request.catch((answer) => {
+			setIsLoading(false);
+			alert(answer.data.message);
+		});
 	}
 
 	function handleClick(dayNumber) {
