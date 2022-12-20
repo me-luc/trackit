@@ -29,7 +29,7 @@ export default function HabitsPage() {
 			<StyledPage>
 				<NewHabitBox>
 					<Title>Meus hábitos</Title>
-					<NewIcon onClick={addNew} data-identifier="create-habit-btn">
+					<NewIcon onClick={addNew} data-test="create-habit-btn">
 						<ion-icon name="add-outline"></ion-icon>
 					</NewIcon>
 				</NewHabitBox>
@@ -42,7 +42,7 @@ export default function HabitsPage() {
 				)}
 
 				{(!habits || habits === undefined || habits.length === 0) && (
-					<NoHabitText data-identifier="no-habit-message">
+					<NoHabitText data-test="no-habit-message">
 						Você não tem nenhum hábito cadastrado ainda. Adicione um
 						hábito para começar a trackear!
 					</NoHabitText>
@@ -51,7 +51,7 @@ export default function HabitsPage() {
 				{!habits && <Loading />}
 
 				{habits !== null && (
-					<HabitsBox>
+					<HabitsBox data-test="habit-container">
 						{habits.map((habit) => (
 							<HabitInfo
 								habit={habit}
