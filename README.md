@@ -19,7 +19,7 @@ Users should be able to:
 - Login and sign up to the app
 - Create, delete or change habits.
 - See what is available on today's page
-- Check the today's habits as done
+- Check / uncheck today's habits 
 - See the total progress made today
 
 ### `Screenshot`
