@@ -34,10 +34,10 @@ export default function TodayPage() {
 			<Authenticate />
 			<Header />
 			<StyledPage>
-				<Title>{CURRENT_DATE}</Title>
+				<Title data-identifier="today-infos">{CURRENT_DATE}</Title>
 
 				{progress > 0 ? (
-					<ProgressText>
+					<ProgressText data-identifier="today-infos">
 						{progress}% dos hábitos concluídos
 					</ProgressText>
 				) : (
