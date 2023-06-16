@@ -181,7 +181,7 @@ Project Link: [https://github.com/me-luc/trackit](https://github.com/me-luc/trac
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/almeida-lucas1
 
-[product-screenshot]: public/trackit-screenshot.png
+[product-screenshot]: public/screen-capture.gif
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
